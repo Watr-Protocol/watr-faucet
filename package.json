@@ -1,0 +1,27 @@
+{
+  "name": "watr-faucet",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "git@github.com:niall-watr/watr-faucet.git",
+  "author": "Niall Moore <niall@watr.org>",
+  "license": "MIT",
+  "dependencies": {
+    "@polkadot/api": "^9.4.3",
+    "@polkadot/util": "^10.1.9",
+    "@polkadot/util-crypto": "^10.1.9",
+    "aws-sdk": "^2.1228.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/types": "^3.183.0",
+    "@polkadot/types": "^9.4.3",
+    "@types/aws-lambda": "^8.10.106",
+    "@types/node": "^18.8.1",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "clean": "rm watr-faucet.zip && rm -rf ./bin",
+    "build": "yarn clean && tsc",
+    "start": "tsc && node ./bin/main.js",
+    "zip": "yarn build && cp -r ./node_modules ./bin && cd ./bin && zip -vr ../watr-faucet.zip ."
+  }
+}
