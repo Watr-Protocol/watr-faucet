@@ -8,6 +8,7 @@ export default class WatrBot {
     constructor(token: string, sendMessages: boolean) {
         this.bot = new TelegramBot(token)
         this.sendMessages = sendMessages
+        console.debug(`Initialising bot with sending ${this.sendMessages ? "on" : "off"}`)
     }
 
     parse(input: Update): [boolean, string|null] {
@@ -24,7 +25,7 @@ export default class WatrBot {
         if (this.sendMessages) {
             this.bot.sendMessage(input.channel_post?.chat.id ?? input.message!!.chat.id, telegramMessage(messageType))
         } else {
-            console.debug(`Recieved update: ${input}`)
+            console.debug(`Received update: ${input}`)
             console.debug(`Logging dummy message: ${telegramMessage(messageType)}`)
         }
     }

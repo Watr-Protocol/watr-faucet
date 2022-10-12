@@ -5,7 +5,8 @@ import WatrBot from "./telegram/WatrBot"
 import { MessageType } from "./telegram/MessageType"
 
 export const lambdaHandler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
-    const liveMode = Boolean(process.env.LIVE_MODE)
+    console.debug(`token: ${process.env.TELEGRAM_TOKEN}`)
+    const liveMode = process.env.LIVE_MODE?.toUpperCase() == "TRUE"
     const bot = new WatrBot(process.env.TELEGRAM_TOKEN ?? "", liveMode)
     const body = event.body
     const update: Update = JSON.parse(body ?? "")
