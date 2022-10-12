@@ -9,7 +9,9 @@
     "@polkadot/api": "^9.4.3",
     "@polkadot/util": "^10.1.9",
     "@polkadot/util-crypto": "^10.1.9",
-    "aws-sdk": "^2.1228.0"
+    "@types/node-telegram-bot-api": "^0.57.1",
+    "aws-sdk": "^2.1228.0",
+    "node-telegram-bot-api": "^0.59.0"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.183.0",
