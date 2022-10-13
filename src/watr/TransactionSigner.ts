@@ -23,7 +23,6 @@ export default class TransactionSigner implements Signer {
                 } else {
                     console.log(`Loaded secret data from ${data?.Name}`)
                     const json: ISecret = JSON.parse(data!.SecretString!)
-                    console.log(`json: `)
                     this.localAddress = this.localKeystore!.addFromMnemonic(json!.value!).address;
                 }
                 console.debug(`Address: ${this.localAddress}`)
