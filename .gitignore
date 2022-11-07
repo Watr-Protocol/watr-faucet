@@ -105,3 +105,5 @@ bin
 .tern-port
 
 *.zip
+
+**.test.js

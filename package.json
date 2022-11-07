@@ -24,7 +24,7 @@
     "typescript": "^4.8.4"
   },
   "scripts": {
-    "clean": "rm watr-faucet.zip && rm -rf ./bin",
+    "clean": "rm -f watr-faucet.zip && rm -rf ./bin",
     "build": "yarn clean && tsc",
     "start": "tsc && node ./bin/main.js",
     "zip": "yarn build && cp -r ./node_modules ./bin && cd ./bin && zip -vr ../watr-faucet.zip .",
