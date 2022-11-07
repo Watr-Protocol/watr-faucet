@@ -9,21 +9,25 @@
     "@polkadot/api": "^9.4.3",
     "@polkadot/util": "^10.1.9",
     "@polkadot/util-crypto": "^10.1.9",
-    "@types/node-telegram-bot-api": "^0.57.1",
     "aws-sdk": "^2.1228.0",
     "node-telegram-bot-api": "^0.59.0"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.183.0",
+    "@jest/globals": "^29.2.2",
     "@polkadot/types": "^9.4.3",
     "@types/aws-lambda": "^8.10.106",
     "@types/node": "^18.8.1",
+    "@types/node-telegram-bot-api": "^0.57.1",
+    "jest": "^29.2.2",
+    "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
   },
   "scripts": {
     "clean": "rm watr-faucet.zip && rm -rf ./bin",
     "build": "yarn clean && tsc",
     "start": "tsc && node ./bin/main.js",
-    "zip": "yarn build && cp -r ./node_modules ./bin && cd ./bin && zip -vr ../watr-faucet.zip ."
+    "zip": "yarn build && cp -r ./node_modules ./bin && cd ./bin && zip -vr ../watr-faucet.zip .",
+    "test": "jest"
   }
 }
