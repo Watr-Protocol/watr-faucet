@@ -15,7 +15,7 @@ export const lambdaHandler = async (event: APIGatewayEvent, _context: Context): 
         const faucet = new Faucet()
         bot.send(update, MessageType.WORKING)
         if (isEthereumAddress(address)) {
-            address = evmToAddress(address)
+            address = evmToAddress(address, 19)
         } 
         const result = await faucet.send(address)
         if (result) {
