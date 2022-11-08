@@ -1,16 +1,14 @@
 import { WsProvider, ApiPromise } from "@polkadot/api"
-import Semaphore from "../util/Semaphore"
 import TransactionSigner from "./TransactionSigner"
 
 const WATR_ENDPOINT = "wss://rpc.dev.watr.org/"
 
-export default class WatrClient extends Semaphore {
+export default class WatrClient{
     private api?: ApiPromise
     private signer: TransactionSigner = new TransactionSigner()
     private connected: Boolean = false
     async awaitReady(): Promise<void> {
-        const lock = await this.accquire()
-        if (this.connected) return lock.release()
+        if (this.connected) return 
         console.info(`Connecting to ${WATR_ENDPOINT}`)
         const provider: WsProvider = new WsProvider(WATR_ENDPOINT)
         try {
@@ -23,11 +21,10 @@ export default class WatrClient extends Semaphore {
               console.info(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
 
           } catch (e) {
-            lock.release()
             return this.awaitReady()
         }
         this.connected = true
-        return Promise.resolve(lock.release())
+        return Promise.resolve()
     }
 
     async send(address: String, amount: String): Promise<boolean> {

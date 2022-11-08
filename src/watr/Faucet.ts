@@ -6,7 +6,6 @@ export default class Faucet {
 
     constructor() {
         this.client = new WatrClient()
-        this.client.awaitReady()
     }
 
     async send(address: String): Promise<boolean> {

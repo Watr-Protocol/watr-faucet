@@ -1,5 +1,4 @@
 import  TelegramBot, { Update }  from "node-telegram-bot-api"
-import { MessageType, telegramMessage } from "./MessageType"
 export default class WatrBot {
     private bot: TelegramBot
     private COMMAND: string = "/hydrate"
@@ -21,12 +20,12 @@ export default class WatrBot {
         return [validCommand, address]
     }
 
-    send(input: Update, messageType: MessageType): void {
+    send(input: Update, message: string): void {
         if (this.sendMessages) {
-            this.bot.sendMessage(input.channel_post?.chat.id ?? input.message!!.chat.id, telegramMessage(messageType))
+            this.bot.sendMessage(input.channel_post?.chat.id ?? input.message!!.chat.id, message)
         } else {
             console.debug(`Received update: ${input}`)
-            console.debug(`Logging dummy message: ${telegramMessage(messageType)}`)
+            console.debug(`Logging dummy message: ${message}`)
         }
     }
 }
