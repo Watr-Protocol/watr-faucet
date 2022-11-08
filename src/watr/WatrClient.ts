@@ -3,10 +3,12 @@ import TransactionSigner from "./TransactionSigner"
 
 const WATR_ENDPOINT = "wss://rpc.dev.watr.org/"
 
-export default class WatrClient {
+export default class WatrClient{
     private api?: ApiPromise
     private signer: TransactionSigner = new TransactionSigner()
+    private connected: Boolean = false
     async awaitReady(): Promise<void> {
+        if (this.connected) return 
         console.info(`Connecting to ${WATR_ENDPOINT}`)
         const provider: WsProvider = new WsProvider(WATR_ENDPOINT)
         try {
@@ -21,10 +23,14 @@ export default class WatrClient {
           } catch (e) {
             return this.awaitReady()
         }
+        this.connected = true
         return Promise.resolve()
     }
 
     async send(address: String, amount: String): Promise<boolean> {
+        if (!this.connected) {
+            await this.awaitReady()
+        }
         if (this.api != undefined) {
             const signer = this.signer
             console.debug("transferring")
@@ -32,7 +38,7 @@ export default class WatrClient {
             console.log(transfer.toHuman())
             const signed = await transfer.signAsync(signer.localAddress, { signer })
             await signed.send()
-            return true
-        } else return false
+            return Promise.resolve(true)
+        } else return Promise.resolve(false)
     }
 }
